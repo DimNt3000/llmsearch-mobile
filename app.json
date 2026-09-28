@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "llmsearch",
+    "slug": "llmsearch-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.dimnt3000.llmsearch",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B7A64",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true,
+            "useLegacyPackaging": true
+          }
+        }
+      ],
+      "./plugins/with-cmake-object-path-max"
+    ],
+    "scheme": "llmsearch",
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "./**/*.ts",
+    "../src/lib/answer.ts",
+    "../src/lib/format.ts"
+  ],
+  "exclude": []
+}

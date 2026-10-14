@@ -1,0 +1,13 @@
+{
+  "name": "llmsearch",
+  "short_name": "llmsearch",
+  "description": "Search your own index, ask cited questions, search the web, and crawl sites.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F3F4F6",
+  "theme_color": "#0B7A64",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

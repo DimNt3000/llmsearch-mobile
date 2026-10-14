@@ -138,6 +138,31 @@ The APK lands in `android/app/build/outputs/apk/release/app-release.apk`. The
 - The build is signed with the debug key, which is fine for your own devices
   but not for a store.
 
+## iPhone
+
+iOS does not install apps from a file, so on an iPhone the app runs as a web
+app that the llmsearch server hosts next to its API:
+
+```
+npx expo export --platform web --output-dir dist
+python run.py serve --app-dir C:\path\to\llmsearch-mobile\dist
+```
+
+Setting `serve_app_dir` in the server's config makes that permanent. Open the
+server's network address in Safari, then Share, Add to Home Screen. The app
+opens full screen with its own icon, and because it is served from the server
+itself, the Library tab fills in the address on its own; only the token has to
+be typed. Run the export again after changing the app.
+
+- `public/index.html` replaces Expo's default page with one that iOS treats as
+  a home-screen app (`apple-mobile-web-app-capable`, `viewport-fit=cover`,
+  light and dark theme colors), and `public/` also holds the manifest and the
+  icons.
+- In the browser the token is kept in `localStorage`, not the Keychain, and a
+  home-screen app has its own storage, separate from Safari's.
+- The connection is plain HTTP, so it works on the home network or over a VPN
+  such as Tailscale.
+
 ## Testing
 
 ```
@@ -229,6 +254,7 @@ src/components/     UI kit (buttons, fields, banners) and answer/result views
 src/lib/            Answer parser, URL and text helpers, request hooks, storage
 src/theme.ts        Light and dark palettes, spacing, type scale
 plugins/            Config plugin for the Windows path length limit
+public/             Web page, manifest, and icons for the iPhone home-screen app
 tests/              Unit tests run by Node's test runner
 docs/               Screenshots for this README
 ```

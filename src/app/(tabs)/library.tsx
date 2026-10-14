@@ -1,8 +1,8 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
-import { ApiError, type ServerConfig } from '../../api/client';
+import { ApiError, createClient, type ServerConfig } from '../../api/client';
 import type { CrawlJob } from '../../api/types';
 import { Banner, Button, Card, Chip, Field, Header, Screen, SectionTitle } from '../../components/ui';
 import { displayUrl, isCrawlableUrl, plural, withScheme } from '../../lib/format';
@@ -42,6 +42,21 @@ export default function LibraryScreen() {
       setToken(server.token);
     }
   }
+
+  // When `llmsearch serve` hosts the web build (as on an iPhone home screen),
+  // the page's own origin is the server: offer it so only the token is left.
+  useEffect(() => {
+    if (!ready || server || Platform.OS !== 'web' || typeof window === 'undefined') return;
+    const origin = window.location.origin;
+    const controller = new AbortController();
+    createClient({ baseUrl: origin, token: '' })
+      .health(controller.signal)
+      .then((health) => {
+        if (health.service === 'llmsearch') setAddress((current) => current || origin);
+      })
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, [ready, server]);
 
   const loadJob = useCallback(async () => {
     if (!api) return;

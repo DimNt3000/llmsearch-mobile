@@ -27,7 +27,8 @@ It needs `llmsearch serve` running on a computer on the same network.
   claim carries a `[n]` citation; tapping one scrolls to its source, and
   sources the answer never cited are marked as such. Answers can be shared.
 - **Web** runs a live DuckDuckGo search, or **Answer** has the computer read the
-  top pages and answer from their content, with the pages as sources.
+  top pages and answer from their content, with the pages as sources. A site
+  named in the question, such as `sport24.gr`, is read directly and live.
 - **Library** pairs the app with the server, shows the index size and the
   active LLM backend, and crawls a new site with a link depth, a page limit,
   and a same-site switch. Progress and the crawl log update live, and a crawl

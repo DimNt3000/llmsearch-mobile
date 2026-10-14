@@ -99,7 +99,7 @@ export default function WebScreen() {
         </View>
         <Text style={s.hint}>
           {llm
-            ? 'Answer reads the top pages and has Claude answer from them, with sources.'
+            ? 'Answer reads the top pages, or a site you name such as sport24.gr, live, and has Claude answer from them, with sources.'
             : 'Answer needs an LLM backend on the server; Search works without one.'}
         </Text>
       </View>
